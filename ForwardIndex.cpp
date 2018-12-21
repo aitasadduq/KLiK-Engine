@@ -1,9 +1,9 @@
 //Forward indexer for "Enron email dataset
 //Group Members
-//Muhammmad Shaharyar 
+//Ahmad Ali Khan
 //Anas Imran Tasadduq
-//Muhammad Saad Hussaini 
-//Ahmad Ali Khan 
+//Muhammad Saad Hussaini
+//Muhammmad Shaharyar 
 
 //Include All the Required  Libraries 
 #include <iostream>
@@ -66,16 +66,13 @@ void ForwardIndex(string path, int limit = -1)
 	{
 		dbp = session.createSchema(Dname);
 		session.sql("USE " + Dname).execute();
-		//Create tables 
-		session.sql("CREATE TABLE forwardindex(file_id INT PRIMARY KEY AUTO_INCREMENT,file_path TEXT,file_subject TEXT,subject_index LONGTEXT, body_index LONGTEXT);").execute();
-		//session.sql("CREATE TABLE words(file_id INT, subject_word LONGTEXT, body_word LONGTEXT, PRIMARY KEY(file_id),FOREIGN KEY (file_id) REFERENCES files(file_id));").execute();
+		//Create table
+		session.sql("CREATE TABLE forwardindex(file_id INT PRIMARY KEY AUTO_INCREMENT,file_path TEXT,file_subject TEXT, document_index LONGTEXT);").execute();
 		
 	}
 
-	mysqlx::Table findex = dbp.getTable("forwardindex");//Get table forwardfiles
-	//mysqlx::Table forwardwords = dbp.getTable("words");//Get table forwardwords
-	mysqlx::TableInsert insertfindex = findex.insert("file_id","file_path","file_subject","subject_index","body_index");//Insert sepecified Columns
-	//mysqlx::TableInsert insertforwardwords = forwardwords.insert("file_id", "subject_word", "body_word");//Insert Specified Columns
+	mysqlx::Table findex = dbp.getTable("forwardindex");//Get table forwardindex
+	mysqlx::TableInsert insertfindex = findex.insert("file_id","file_path","file_subject","document_index");//Insert sepecified Columns
 
 	//Here is file reading 
 	ifstream file;
@@ -87,8 +84,6 @@ void ForwardIndex(string path, int limit = -1)
 	unordered_map<string, int> skippingwords = skippingwordsmap();
 	boost::filesystem::recursive_directory_iterator it(path), end;// Using BOOSt library for traversing in to the path
 	int count = 1;
-	stringstream query;
-	query << "INSERT IGNORE INTO words(file_id,word) VALUES";
 	time_t start;
 	for (boost::filesystem::directory_entry& entry : boost::make_iterator_range(it, end))//Giving the directory to boost filesystem 
 	{
@@ -97,15 +92,14 @@ void ForwardIndex(string path, int limit = -1)
 		{
 			unordered_map<string, int> uniquewords;
 			stringstream tempstream;
-			string bodywords = "";
-			string subjectwords = "";
+			string doc_words = "";
 			string p = entry.path().string();
 			file.open(p);
 
 			while (getline(file, line))//Reading lineby line from file 
 			{
 
-				if (line.rfind(body, 0) == 0)//Inserting  BodyWords
+				if (line.rfind(body, 0) == 0)//Inserting  doc_words
 				{
 					string word;
 					while (file >> word)
@@ -117,13 +111,14 @@ void ForwardIndex(string path, int limit = -1)
 
 							if (skippingwords.count(temp) == 0)
 							{
-								if (uniquewords.count(temp) == 0) {
-									bodywords += temp + " ";
-									uniquewords[temp] = 1;
-								}
+								uniquewords[temp] += 1;
 							}
 							
 						}
+					}
+					for (auto& word : uniquewords) {
+    					// Do stuff
+    					doc_words += word.first + "," + to_string(word.second) + " ";
 					}
 				}
 				else if (line.rfind(subject, 0) == 0)//Inserting Subject words
@@ -147,18 +142,18 @@ void ForwardIndex(string path, int limit = -1)
 
 							if (skippingwords.count(temp) == 0)
 							{
-								if (uniquewords.count(temp) == 0) {
-									bodywords += temp + " ";
-									uniquewords[temp] = 1;
-								}
+								uniquewords[temp] += 2;
 							}
 						}
 					}
-				
+					for (auto& word : uniquewords) {
+    					// Do stuff
+    					doc_words += word.first + "," + to_string(word.second) + " ";
+					}				
 				}
 			}
 
-			insertfindex.values(count,p,tempstream.str(), subjectwords, bodywords);//Inserting subject words,body words
+			insertfindex.values(count,p,tempstream.str(), doc_words);//Inserting subject words,body words
 			tempstream.str(string());
 			file.close();
 			count++;
@@ -170,7 +165,7 @@ void ForwardIndex(string path, int limit = -1)
 		}
 		else if (count == 1)
 			start = time(0);
-		else if (count % 30000 == 0)//If 5000 limit is reached then insert in to database
+		else if (count % 30000 == 0)//If 30000 limit is reached then insert in to database
 		{
 			int duration = time(0) - start;
 			total_duration += duration;
@@ -180,12 +175,9 @@ void ForwardIndex(string path, int limit = -1)
 			time_t begininsertion = time(0);
 			insertfindex.execute();
 			time_t endinsertion = time(0);
-			//cout << "Inserting Words.\n";
-			//insertforwardwords.execute();
-			//insertfindex = forwardfiles.insert("path", "subject");
 			int ioDuration = endinsertion - begininsertion;
 			totalioDuration += ioDuration;
-			insertfindex = findex.insert("file_id","file_path", "file_subject","subject_index", "body_index");
+			insertfindex = findex.insert("file_id","file_path", "file_subject","document_index");
 			cout << "Inserted into database\n";
 			cout << "Insertion time: " << ioDuration << " seconds" << endl;
 			start = time(0);
@@ -199,8 +191,6 @@ void ForwardIndex(string path, int limit = -1)
 	time_t begininsertion = time(0);
 	insertfindex.execute();
 	time_t endinsertion = time(0);
-	//insertforwardfiles.execute();
-	//insertforwardwords.execute();
 	int ioDuration = endinsertion - begininsertion;
 	totalioDuration += ioDuration;
 	cout << "Inserted into database\n";
@@ -220,6 +210,4 @@ int main()
 	cout << "Computing Time: " << total_duration << " seconds" << endl;
 	cout << "Insertion Time: " << totalioDuration << " seconds" << endl;
 	cout << double(clock() - begin) / CLOCKS_PER_SEC << std::endl;
-	//session.close();
-
 }
