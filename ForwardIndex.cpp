@@ -169,7 +169,7 @@ void ForwardIndex(string path, int limit = -1)
 		}
 		else if (count == 1)
 			start = time(0);
-		else if (count % 30000 == 0)//If 30000 limit is reached then insert in to database
+		else if (count % 10000 == 0)//If 30000 limit is reached then insert in to database
 		{
 			int duration = time(0) - start;
 			total_duration += duration;
