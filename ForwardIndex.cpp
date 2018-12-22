@@ -16,6 +16,7 @@
 #include <boost/filesystem.hpp>//Boost Library for Fectching files in a given directory.
 #include <mysqlx/xdevapi.h> //Connect with mysql server 
 #include <ctime>
+#include <cmath>
 
 using namespace std;
 
@@ -116,10 +117,6 @@ void ForwardIndex(string path, int limit = -1)
 							
 						}
 					}
-					for (auto& word : uniquewords) {
-    					// Do stuff
-    					doc_words += word.first + "," + to_string(word.second) + " ";
-					}
 				}
 				else if (line.rfind(subject, 0) == 0)//Inserting Subject words
 				{
@@ -136,7 +133,7 @@ void ForwardIndex(string path, int limit = -1)
 							continue;
 						}
 						subject += word + " ";
-						std::transform(word.begin(), word.end(), word.begin(), ::tolower);//Transform Function Which convert words to lowe
+						std::transform(word.begin(), word.end(), word.begin(), ::tolower);//Transform Function Which convert words to lowercase
 						if (regex_search(word, match, wordexp)){//for Searching Valid Expressions
 						string temp = match.str();
 
@@ -145,15 +142,22 @@ void ForwardIndex(string path, int limit = -1)
 								uniquewords[temp] += 2;
 							}
 						}
-					}
-					for (auto& word : uniquewords) {
-    					// Do stuff
-    					doc_words += word.first + "," + to_string(word.second) + " ";
-					}				
-				}
+					}		
+				}		
 			}
 
-			insertfindex.values(count,p,tempstream.str(), doc_words);//Inserting subject words,body words
+			int squaresum = 0;
+			for (auto& word : uniquewords) {
+    			squaresum += pow(word.second, 2);
+			}
+			double norm = sqrt(squaresum);
+
+			for (auto& word : uniquewords) {
+    			// Do stuff
+    			doc_words += word.first + "," + to_string(word.second / norm) + " ";
+			}
+
+			insertfindex.values(count, p, tempstream.str(), doc_words);//Inserting document words
 			tempstream.str(string());
 			file.close();
 			count++;
