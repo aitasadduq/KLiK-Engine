@@ -18,6 +18,7 @@ const unsigned portno = 33060;
 const string username = "root";
 const string password = "applepie95";
 const string Dname = "Search_Engine";
+bool resultsFound = false;
 
 // trim from left
 inline std::string& ltrim(std::string& s, const char* t = " \t\n\r\f\v")
@@ -76,6 +77,7 @@ void queryResults(string queryString) {
 	unordered_map<string, double> docs;
 
 	for (mysqlx::Row row : reverseindex) {
+		resultsFound = true;
 		stringstream riword;
 		stringstream ridocuments;
 		stringstream riidf;
@@ -89,37 +91,42 @@ void queryResults(string queryString) {
 		}
 	}
 
-	query = "SELECT file_id, file_path, file_subject FROM forwardindex WHERE file_id IN (";
-	int count = 0;
-	for (auto &file : docs) {
-		query += file.first;
-		if (count < docs.size() - 1) {
-			query += ", ";
+	if (resultsFound) {
+		query = "SELECT file_id, file_path, file_subject FROM forwardindex WHERE file_id IN (";
+		int count = 0;
+		for (auto &file : docs) {
+			query += file.first;
+			if (count < docs.size() - 1) {
+				query += ", ";
+			}
+			count++;
 		}
-		count++;
-	}
-	query += ");";
+		query += ");";
 
-	auto document = docs.begin();
-	mysqlx::RowResult res = session.sql(query).execute();
-	for (mysqlx::Row row : res) {
-		stringstream row2;
-		stringstream row1;
-		row2 << row[2];
-		row1 << row[1];
-		pair<string, string> resPair (row2.str(), row1.str());
-		results[document -> second] = resPair;
-		++document;
-	}
-	
-	int counter = 0;
-	for (auto const& rank : results) {
-		cout << trim(rank.second.first) << "-:-" << trim(rank.second.second) << "-;;-";
-		if (counter == 14) {
-			break;
+		auto document = docs.begin();
+		mysqlx::RowResult res = session.sql(query).execute();
+		for (mysqlx::Row row : res) {
+			stringstream row2;
+			stringstream row1;
+			row2 << row[2];
+			row1 << row[1];
+			pair<string, string> resPair (row2.str(), row1.str());
+			results[document -> second] = resPair;
+			++document;
 		}
-		counter++;
+		
+		int counter = 0;
+		for (auto const& rank : results) {
+			cout << trim(rank.second.first) << "-:-" << trim(rank.second.second) << "-;;-";
+			if (counter == 14) {
+				break;
+			}
+			counter++;
+		}
 	}
+	else {
+		cout << "--:-:--";
+	}	
 }
 
 int main(int argc, char* argv[]) {	
