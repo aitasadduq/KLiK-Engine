@@ -61,7 +61,7 @@ void queryResults(string queryString) {
 	mysqlx::RowResult reverseindex;
 	string query = "SELECT * FROM reverseindex WHERE word IN (";
 
-	map<double, pair<string, string>> results;
+	map<double, pair<string, string>, greater<double>> results;
 
 	std::stringstream queryStream(queryString);
 	std::string word;
@@ -112,8 +112,13 @@ void queryResults(string queryString) {
 		++document;
 	}
 	
+	int counter = 0;
 	for (auto const& rank : results) {
-		cout << rank.first << "::" << trim(rank.second.first) << "::" << trim(rank.second.second) << "--";
+		cout << trim(rank.second.first) << "-:-" << trim(rank.second.second) << "-;;-";
+		if (counter == 14) {
+			break;
+		}
+		counter++;
 	}
 }
 
