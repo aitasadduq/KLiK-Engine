@@ -1,0 +1,72 @@
+\hypertarget{_forward_index_8cpp}{}\section{mysql/\+New folder/\+Forward\+Index.cpp File Reference}
+\label{_forward_index_8cpp}\index{mysql/\+New folder/\+Forward\+Index.\+cpp@{mysql/\+New folder/\+Forward\+Index.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$boost/range.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/filesystem.\+hpp$>$}\newline
+{\ttfamily \#include $<$mysqlx/xdevapi.\+h$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_a0625cc69273a83665381e0844e4ee00c}\label{_forward_index_8cpp_a0625cc69273a83665381e0844e4ee00c}} 
+unordered\+\_\+map$<$ string, int $>$ {\bfseries skippingwordsmap} ()
+\item 
+void \mbox{\hyperlink{_forward_index_8cpp_a884b6ef6794b104e46d73a186338133f}{Forward\+Index}} (string path, int limit=-\/1)
+\item 
+int \mbox{\hyperlink{_forward_index_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_ae803ad36ef6699a8441fcd2b8ec8c414}\label{_forward_index_8cpp_ae803ad36ef6699a8441fcd2b8ec8c414}} 
+const string {\bfseries Dname} = \char`\"{}Search\+\_\+\+Engine\char`\"{}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_ab46df6dc880c118d072976d61be44ad7}\label{_forward_index_8cpp_ab46df6dc880c118d072976d61be44ad7}} 
+const string {\bfseries hostname} = \char`\"{}localhost\char`\"{}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_aad780bf25bcac1d3c327639bba022835}\label{_forward_index_8cpp_aad780bf25bcac1d3c327639bba022835}} 
+const string {\bfseries username} = \char`\"{}root\char`\"{}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_a3645270b9b6de909b92ac5b6071812eb}\label{_forward_index_8cpp_a3645270b9b6de909b92ac5b6071812eb}} 
+const string {\bfseries password} = \char`\"{}Hunter123@\char`\"{}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_ad3295d56f3d1c14485eb4bf754e16308}\label{_forward_index_8cpp_ad3295d56f3d1c14485eb4bf754e16308}} 
+const unsigned {\bfseries portno} = 33060
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_a70cfbd28d5222e0fe584b0e8a4a0ecca}\label{_forward_index_8cpp_a70cfbd28d5222e0fe584b0e8a4a0ecca}} 
+int {\bfseries total\+\_\+duration} = 0
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_a15e9afec23932705e1a42710ab080b9c}\label{_forward_index_8cpp_a15e9afec23932705e1a42710ab080b9c}} 
+int {\bfseries totalio\+Duration} = 0
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_a4f2c01872c8c3865f8ba57e21c4da43d}\label{_forward_index_8cpp_a4f2c01872c8c3865f8ba57e21c4da43d}} 
+const string {\bfseries subject} = \char`\"{}Subject\char`\"{}
+\item 
+\mbox{\Hypertarget{_forward_index_8cpp_a89baac794a89ecc632869d06cbaac340}\label{_forward_index_8cpp_a89baac794a89ecc632869d06cbaac340}} 
+const string {\bfseries body} = \char`\"{}X-\/File\+Name\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This program includes forward index of the files 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_forward_index_8cpp_a884b6ef6794b104e46d73a186338133f}\label{_forward_index_8cpp_a884b6ef6794b104e46d73a186338133f}} 
+\index{Forward\+Index.\+cpp@{Forward\+Index.\+cpp}!Forward\+Index@{Forward\+Index}}
+\index{Forward\+Index@{Forward\+Index}!Forward\+Index.\+cpp@{Forward\+Index.\+cpp}}
+\subsubsection{\texorpdfstring{Forward\+Index()}{ForwardIndex()}}
+{\footnotesize\ttfamily Forward\+Index (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{int}]{limit = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Function for forward indexing of the files \mbox{\Hypertarget{_forward_index_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{_forward_index_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{Forward\+Index.\+cpp@{Forward\+Index.\+cpp}!main@{main}}
+\index{main@{main}!Forward\+Index.\+cpp@{Forward\+Index.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+The main function for for driving the program 

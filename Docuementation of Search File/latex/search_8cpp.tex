@@ -1,0 +1,89 @@
+\hypertarget{search_8cpp}{}\section{Search\+Engine1/search.cpp File Reference}
+\label{search_8cpp}\index{Search\+Engine1/search.\+cpp@{Search\+Engine1/search.\+cpp}}
+{\ttfamily \#include \char`\"{}pch.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iterator$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$boost/range.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/filesystem.\+hpp$>$}\newline
+{\ttfamily \#include $<$mysqlx/xdevapi.\+h$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \& \mbox{\hyperlink{search_8cpp_a025903eeb6028a3e6c0a17d3cbdce1b3}{ltrim}} (std\+::string \&s, const char $\ast$t=\char`\"{} \textbackslash{}\textbackslash{}\textbackslash{})
+\item 
+std\+::string \& \mbox{\hyperlink{search_8cpp_a78dbd5ee412cb4c827f665b14f2cb453}{rtrim}} (std\+::string \&s, const char $\ast$t=\char`\"{} \textbackslash{}\textbackslash{}\textbackslash{})
+\item 
+std\+::string \& \mbox{\hyperlink{search_8cpp_a24edad42d24c45fcbd23deb313dfb32d}{trim}} (std\+::string s, const char $\ast$t=\char`\"{} \textbackslash{}\textbackslash{}\textbackslash{})
+\item 
+\mbox{\Hypertarget{search_8cpp_a0625cc69273a83665381e0844e4ee00c}\label{search_8cpp_a0625cc69273a83665381e0844e4ee00c}} 
+unordered\+\_\+map$<$ string, int $>$ {\bfseries skippingwordsmap} ()
+\item 
+void \mbox{\hyperlink{search_8cpp_a230e311e7f176c12ac8a343d6d4417b3}{query\+Results}} (string query\+String)
+\item 
+int \mbox{\hyperlink{search_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{search_8cpp_ab46df6dc880c118d072976d61be44ad7}\label{search_8cpp_ab46df6dc880c118d072976d61be44ad7}} 
+const string {\bfseries hostname} = \char`\"{}localhost\char`\"{}
+\item 
+\mbox{\Hypertarget{search_8cpp_ad3295d56f3d1c14485eb4bf754e16308}\label{search_8cpp_ad3295d56f3d1c14485eb4bf754e16308}} 
+const unsigned {\bfseries portno} = 33060
+\item 
+\mbox{\Hypertarget{search_8cpp_aad780bf25bcac1d3c327639bba022835}\label{search_8cpp_aad780bf25bcac1d3c327639bba022835}} 
+const string {\bfseries username} = \char`\"{}root\char`\"{}
+\item 
+\mbox{\Hypertarget{search_8cpp_a3645270b9b6de909b92ac5b6071812eb}\label{search_8cpp_a3645270b9b6de909b92ac5b6071812eb}} 
+const string {\bfseries password} = \char`\"{}Hunter123@\char`\"{}
+\item 
+\mbox{\Hypertarget{search_8cpp_ae803ad36ef6699a8441fcd2b8ec8c414}\label{search_8cpp_ae803ad36ef6699a8441fcd2b8ec8c414}} 
+const string {\bfseries Dname} = \char`\"{}Search\+\_\+\+Engine\char`\"{}
+\item 
+\mbox{\Hypertarget{search_8cpp_a24233699b0b546f27e2b9b5fd50d53d1}\label{search_8cpp_a24233699b0b546f27e2b9b5fd50d53d1}} 
+bool {\bfseries results\+Found} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This program includes Grading of students 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{search_8cpp_a025903eeb6028a3e6c0a17d3cbdce1b3}\label{search_8cpp_a025903eeb6028a3e6c0a17d3cbdce1b3}} 
+\index{search.\+cpp@{search.\+cpp}!ltrim@{ltrim}}
+\index{ltrim@{ltrim}!search.\+cpp@{search.\+cpp}}
+\subsubsection{\texorpdfstring{ltrim()}{ltrim()}}
+{\footnotesize\ttfamily string \& ltrim (\begin{DoxyParamCaption}\item[{std\+::string \&}]{s,  }\item[{const char $\ast$}]{t = {\ttfamily \char`\"{}~\textbackslash{}t\textbackslash{}n\textbackslash{}r\textbackslash{}f\textbackslash{}v\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The function to trim from left \mbox{\Hypertarget{search_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{search_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{search.\+cpp@{search.\+cpp}!main@{main}}
+\index{main@{main}!search.\+cpp@{search.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+The main function for calulations \mbox{\Hypertarget{search_8cpp_a230e311e7f176c12ac8a343d6d4417b3}\label{search_8cpp_a230e311e7f176c12ac8a343d6d4417b3}} 
+\index{search.\+cpp@{search.\+cpp}!query\+Results@{query\+Results}}
+\index{query\+Results@{query\+Results}!search.\+cpp@{search.\+cpp}}
+\subsubsection{\texorpdfstring{query\+Results()}{queryResults()}}
+{\footnotesize\ttfamily query\+Results (\begin{DoxyParamCaption}\item[{string}]{query\+String }\end{DoxyParamCaption})}
+
+Getting the value of the index of average value \mbox{\Hypertarget{search_8cpp_a78dbd5ee412cb4c827f665b14f2cb453}\label{search_8cpp_a78dbd5ee412cb4c827f665b14f2cb453}} 
+\index{search.\+cpp@{search.\+cpp}!rtrim@{rtrim}}
+\index{rtrim@{rtrim}!search.\+cpp@{search.\+cpp}}
+\subsubsection{\texorpdfstring{rtrim()}{rtrim()}}
+{\footnotesize\ttfamily string \& rtrim (\begin{DoxyParamCaption}\item[{std\+::string \&}]{s,  }\item[{const char $\ast$}]{t = {\ttfamily \char`\"{}~\textbackslash{}t\textbackslash{}n\textbackslash{}r\textbackslash{}f\textbackslash{}v\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The function to trim from right \mbox{\Hypertarget{search_8cpp_a24edad42d24c45fcbd23deb313dfb32d}\label{search_8cpp_a24edad42d24c45fcbd23deb313dfb32d}} 
+\index{search.\+cpp@{search.\+cpp}!trim@{trim}}
+\index{trim@{trim}!search.\+cpp@{search.\+cpp}}
+\subsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily string \& trim (\begin{DoxyParamCaption}\item[{std\+::string}]{s,  }\item[{const char $\ast$}]{t = {\ttfamily \char`\"{}~\textbackslash{}t\textbackslash{}n\textbackslash{}r\textbackslash{}f\textbackslash{}v\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The function to trim from left and right 
