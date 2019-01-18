@@ -151,7 +151,7 @@ A huge thanks to the wonderful team without which this entire project would not 
 [msaad1999](https://github.com/msaad1999) | [mshaharyar17](https://github.com/mshaharyar17) | ahmed | [aitasadduq](https://github.com/aitasadduq)
 
 
-### KLiK - Social Media Website
+## KLiK - Social Media Website
 
 Check out the complete project for this login system. [KLiK](https://github.com/msaad1999/KLiK-SocialMediaWebsite) is a complete Social Media website, along with a Complete Login/Registration system, Profile system, Chat room, Forum system and Blog/Polls/Event Management System.
 
